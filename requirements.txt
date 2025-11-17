@@ -1,5 +1,5 @@
-aiogram==3.2.2
+aiogram==3.22.0
 SQLAlchemy==2.0.26
 aiosqlite==0.19.1
-asyncpg==0.27.0   # якщо колись захочеш Postgres
+asyncpg==0.27.0   # якщо плануєш Postgres
 python-dotenv==1.0.0
