@@ -1,7 +1,7 @@
 # handlers/support.py
 from aiogram import Router
 from aiogram.types import CallbackQuery
-from texts import texts
+from texts import TEXTS
 
 router = Router()
 
