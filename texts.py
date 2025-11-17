@@ -1,17 +1,32 @@
 TEXTS = {
-    "start": {
-        "UA": "👋 Привіт, {name}!\nТи у TurboInviteBot!\n\n💸 Заробляй за друзів\n🚀 Розкручуй свій канал\n⭐ Купуй Telegram Stars\n💳 Виводь гроші",
-        "EN": "👋 Hi, {name}!\nWelcome to TurboInviteBot!\n\n💸 Earn from referrals\n🚀 Promote your channel\n⭐ Buy Telegram Stars\n💳 Withdraw money",
-        "RU": "👋 Привет, {name}!\nТы в TurboInviteBot!\n\n💸 Зарабатывай с друзей\n🚀 Продвигай свой канал\n⭐ Покупай Telegram Stars\n💳 Выводи деньги"
+    "welcome": {
+        "EN": "👋 Hello, {name}!\nYou are in TurboInviteBot!\n\nWhat you can:\n💸 Earn from invites\n🚀 Promote your channel\n⭐ Buy Telegram Stars\n💳 Withdraw money",
+        "UA": "👋 Привіт, {name}!\nТи в TurboInviteBot!\n\nТут можна:\n💸 Заробляти за друзів\n🚀 Розкручувати свій канал\n⭐ Купувати Telegram Stars\n💳 Виводити гроші",
+        "RU": "👋 Привет, {name}!\nТы в TurboInviteBot!\n\nЗдесь можно:\n💸 Зарабатывать на рефералах\n🚀 Продвигать канал\n⭐ Покупать Telegram Stars\n💳 Выводить деньги"
     },
-    "referral_link": {
-        "UA": "🔗 Твій реферальний лінк:\n{link}",
-        "EN": "🔗 Your referral link:\n{link}",
-        "RU": "🔗 Твой реферальный линк:\n{link}"
+    "menu_title": {
+        "EN": "Main menu",
+        "UA": "Головне меню",
+        "RU": "Главное меню"
     },
     "balance": {
-        "UA": "📊 Баланс: {balance} {currency}\n👥 Запрошено: {referrals}",
-        "EN": "📊 Balance: {balance} {currency}\n👥 Referrals: {referrals}",
-        "RU": "📊 Баланс: {balance} {currency}\n👥 Приглашено: {referrals}"
+        "EN": "Your balance: {bal} {cur}\nInvited: {ref}",
+        "UA": "Ваш баланс: {bal} {cur}\nЗапрошено користувачів: {ref}",
+        "RU": "Ваш баланс: {bal} {cur}\nПриглашено пользователей: {ref}"
+    },
+    "choose_language": {
+        "EN": "Choose language",
+        "UA": "Оберіть мову",
+        "RU": "Выберите язык"
+    },
+    "earn_text": {
+        "EN": "Share this message and earn:\nInvite link: {link}\nYou get: 0.25 USD / 10 UAH / 25 RUB per user",
+        "UA": "Поділись повідомленням і заробляй:\nРеферальне посилання: {link}\nТи отримуєш: 0.25 USD / 10 UAH / 25 RUB за кожного",
+        "RU": "Поделитесь ссылкой и зарабатывайте:\nРеферальная ссылка: {link}\nВы получаете: 0.25 USD / 10 UAH / 25 RUB за каждого"
+    },
+    "withdraw_started": {
+        "EN": "Withdraw request created. Admin will check it.",
+        "UA": "Запит на вивід створено. Адмін перевірить його.",
+        "RU": "Запрос на вывод создан. Админ проверит его."
     }
 }
