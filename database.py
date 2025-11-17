@@ -1,14 +1,26 @@
 import sqlite3
-DB_PATH = "data/turbo.db"
+import os
+from datetime import datetime
+
+# Створюємо папку для бази, якщо її немає
+DB_DIR = "data"
+DB_PATH = os.path.join(DB_DIR, "turbo.db")
+
+if not os.path.exists(DB_DIR):
+    os.makedirs(DB_DIR)
 
 def get_connection():
+    """Повертає з'єднання з базою даних SQLite"""
     conn = sqlite3.connect(DB_PATH)
     conn.row_factory = sqlite3.Row
     return conn
 
 def create_tables():
+    """Створює всі таблиці, якщо вони ще не існують"""
     conn = get_connection()
     cursor = conn.cursor()
+    
+    # Користувачі
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS users (
             user_id INTEGER PRIMARY KEY,
@@ -20,6 +32,8 @@ def create_tables():
             join_date TEXT
         )
     """)
+    
+    # Запити на вивід
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS withdraw_requests (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -31,6 +45,8 @@ def create_tables():
             date TEXT
         )
     """)
+    
+    # Транзакції
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS transactions (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -41,6 +57,8 @@ def create_tables():
             date TEXT
         )
     """)
+    
+    # Замовлення на канали
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS channel_orders (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -52,6 +70,8 @@ def create_tables():
             date TEXT
         )
     """)
+    
+    # Досягнення
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS achievements (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -60,7 +80,9 @@ def create_tables():
             date TEXT
         )
     """)
+    
     conn.commit()
     conn.close()
 
+# Викликаємо створення таблиць при імпорті
 create_tables()
