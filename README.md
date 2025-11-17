@@ -1,52 +1,23 @@
-# Turboinvite[README_Version2.md](https://github.com/user-attachments/files/23571591/README_Version2.md)
-# TurboInviteBot
+# Telegram Bot
 
-Повноцінний Telegram-бот для заробітку на рефералах, розкрутки каналів, купівлі Telegram Stars та управління балансом.
+This Telegram bot supports Ukrainian, English, Russian, multi-currency, referrals, withdrawals, and an admin panel.
 
-## Запуск на Railway
+## Setup
 
-1. **Склонуйте проект:**
-   ```
-   git clone https://github.com/genautittok-lang/Turboinvite.git
-   cd Turboinvite
-   ```
+1. **Встановіть залежності**: `pip install -r requirements.txt`.
+2. **Налаштуйте змінні оточення**:
+   - `BOT_TOKEN` – токен вашого бота (заведений у BotFather).
+   - `ADMIN_IDS` – (опціонально) список ID адмінів через кому.
+   - `DATABASE_URL` – (для PostgreSQL) URL підключення до бази даних.
+3. **Додайте PostgreSQL сервіс на Railway**. Railway автоматично створить `DATABASE_URL` для з’єднання:contentReference[oaicite:12]{index=12}.
+4. **Procfile**: має містити рядок `worker: python main.py`, щоб Railway знало, як запускати бота:contentReference[oaicite:13]{index=13}.
+5. **Запуск на Railway**:
+   - Підключіть репозиторій до Railway (через GitHub або Railway CLI).
+   - Деплой відбудеться автоматично після пушу в гілку. Бот запуститься з Long Polling.
 
-2. **Встановіть залежності:**
-   ```
-   pip install -r requirements.txt
-   ```
+## Використані ресурси
 
-3. **Додайте у Railway Secrets/Variables:**
-   - `BOT_TOKEN` — отримайте у @BotFather
-   - `BOT_USERNAME` — без @ (наприклад TurboInviteBot)
-   - `ADMIN_ID` — ваш Telegram ID для адмінки
-
-4. **Створіть папку data/** (якщо ще немає)
-   ```
-   mkdir data
-   ```
-
-5. **Запуск:**
-   ```
-   python main.py
-   ```
-
-## Структура проекту
-
-- `main.py` — запускає бота та реєструє всі хендлери
-- `handlers/` — вся логіка роботи
-- `database.py` — SQLite база даних
-- `requirements.txt` — залежності
-- `README.md` — інструкції
-
-## Мови і дизайн
-
-- UA / EN / RU
-- Темна/світла тема, інлайн-кнопки з емодзі
-
----
-
-## Розширення
-
-- Додавайте свої функції у handlers/*.py
-- Для розсилки, розкрутки, Stars, адмін-функцій — розширюйте логіку у відповідних файлах
+- Документація Aiogram 3.x (і приклади коду):contentReference[oaicite:14]{index=14}:contentReference[oaicite:15]{index=15}.
+- Системи перекладу Aiogram (gettext, Babel):contentReference[oaicite:16]{index=16}.
+- Railway: додавання PostgreSQL сервісу та змінних оточення:contentReference[oaicite:17]{index=17}:contentReference[oaicite:18]{index=18}.
+- Інші бібліотеки: SQLAlchemy для ORM, python-dotenv для читання `.env`.
