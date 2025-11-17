@@ -5,7 +5,7 @@ from aiogram.filters import CommandStart
 from aiogram.utils.deep_linking import decode_payload
 from database import SessionLocal
 from models import User
-from texts import texts
+from texts import TEXTS
 from keyboards.main_menu import main_menu
 
 router = Router()
