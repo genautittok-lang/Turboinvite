@@ -1,9 +1,10 @@
+# handlers/stars.py
+from aiogram import Router
 from aiogram.types import CallbackQuery
 
-def register_stars(dp):
-    @dp.callback_query(lambda c: c.data == "stars")
-    async def stars_handler(call: CallbackQuery):
-        await call.message.answer(
-            "Купівля Telegram Stars — тут буде логіка вибору кількості та оплати. (Розширити за потребою)"
-        )
-        await call.answer()
+router = Router()
+
+@router.callback_query(lambda c: c.data == "stars")
+async def buy_stars(query: CallbackQuery):
+    # Реалізація покупки за баланс чи інтеграція з криптоплатежем опущена
+    await query.message.answer("⭐ Купівля Telegram Stars: ця функція тут демонструє тільки інтерфейс. Реалізації платежу немає.")
