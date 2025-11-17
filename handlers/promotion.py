@@ -1,9 +1,10 @@
+# handlers/promotion.py
+from aiogram import Router
 from aiogram.types import CallbackQuery
 
-def register_promotion(dp):
-    @dp.callback_query(lambda c: c.data == "promo")
-    async def promo_handler(call: CallbackQuery):
-        await call.message.answer(
-            "Розкрутка каналів — тут буде логіка вибору каналу, підписників та ціни. (Розширити за потребою)"
-        )
-        await call.answer()
+router = Router()
+
+@router.callback_query(lambda c: c.data == "promotion")
+async def promotion(query: CallbackQuery):
+    # Тут би було замовлення підписок з урахуванням рівня (знижки)
+    await query.message.answer("🚀 Функція розкрутки: тут має бути логіка замовлення підписок із знижками за рівнем.")
