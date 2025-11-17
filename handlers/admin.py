@@ -1,48 +1,39 @@
-from aiogram import types
-from config import ADMIN_ID
-from database import get_connection
+# handlers/admin.py
+from aiogram import Router
+from aiogram.types import Message
+from aiogram.filters import Text, Command
+from database import SessionLocal
+from models import User
+from config import ADMIN_IDS
 
-def register_admin(dp):
-    @dp.message(lambda m: m.from_user.id == ADMIN_ID and m.text.startswith("/withdraws"))
-    async def list_withdraws(msg: types.Message):
-        conn = get_connection()
-        cur = conn.cursor()
-        cur.execute("SELECT * FROM withdraw_requests WHERE status = 'pending'")
-        rows = cur.fetchall()
-        if not rows:
-            await msg.reply("No pending withdraws.")
-            conn.close()
-            return
-        text = "Pending withdraws:\n"
-        for r in rows:
-            text += f"ID: {r['id']} user:{r['user_id']} amount:{r['amount']} {r['currency']} method:{r['method']} details:{r['details']}\n"
-        conn.close()
-        await msg.reply(text)
+router = Router()
 
-    @dp.message(lambda m: m.from_user.id == ADMIN_ID and m.text.startswith("/approve"))
-    async def approve(msg: types.Message):
-        parts = msg.text.split()
-        if len(parts) < 2:
-            await msg.reply("Usage: /approve <id>")
-            return
-        req_id = parts[1]
-        conn = get_connection()
-        cur = conn.cursor()
-        cur.execute("UPDATE withdraw_requests SET status = 'approved' WHERE id = ?", (req_id,))
-        conn.commit()
-        conn.close()
-        await msg.reply(f"Request {req_id} approved.")
+@router.message(Command("admin"))
+async def admin_help(message: Message):
+    if message.from_user.id in ADMIN_IDS:
+        await message.answer("Адмін-панель:\n/check_withdraws\n/ban <user_id>\n/balance_set <user_id> <amount>\n/broadcast <text>")
+    else:
+        await message.answer("У вас немає доступу до адмін-панелі.")
 
-    @dp.message(lambda m: m.from_user.id == ADMIN_ID and m.text.startswith("/decline"))
-    async def decline(msg: types.Message):
-        parts = msg.text.split()
-        if len(parts) < 2:
-            await msg.reply("Usage: /decline <id>")
-            return
-        req_id = parts[1]
-        conn = get_connection()
-        cur = conn.cursor()
-        cur.execute("UPDATE withdraw_requests SET status = 'declined' WHERE id = ?", (req_id,))
-        conn.commit()
-        conn.close()
-        await msg.reply(f"Request {req_id} declined.")
+@router.message(Command("check_withdraws"))
+async def check_withdraws(message: Message):
+    if message.from_user.id not in ADMIN_IDS:
+        return
+    # Тут би вибирали всі pending-заявки і показували їх
+    await message.answer("Перелік заявок на виведення (приклад):")
+
+@router.message(Text(startswith="/ban"))
+async def ban_user(message: Message):
+    if message.from_user.id not in ADMIN_IDS:
+        return
+    parts = message.text.split()
+    if len(parts) == 2:
+        uid = int(parts[1])
+        db = SessionLocal()
+        user = db.query(User).filter_by(user_id=uid).first()
+        if user:
+            user.is_banned = True
+            db.commit()
+            await message.answer(f"Користувача {uid} заблоковано.")
+        else:
+            await message.answer("Користувача не знайдено.")
