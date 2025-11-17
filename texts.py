@@ -1,32 +1,36 @@
-TEXTS = {
-    "welcome": {
-        "EN": "👋 Hello, {name}!\nYou are in TurboInviteBot!\n\nWhat you can:\n💸 Earn from invites\n🚀 Promote your channel\n⭐ Buy Telegram Stars\n💳 Withdraw money",
-        "UA": "👋 Привіт, {name}!\nТи в TurboInviteBot!\n\nТут можна:\n💸 Заробляти за друзів\n🚀 Розкручувати свій канал\n⭐ Купувати Telegram Stars\n💳 Виводити гроші",
-        "RU": "👋 Привет, {name}!\nТы в TurboInviteBot!\n\nЗдесь можно:\n💸 Зарабатывать на рефералах\n🚀 Продвигать канал\n⭐ Покупать Telegram Stars\n💳 Выводить деньги"
+# texts.py
+texts = {
+    'uk': {
+        'welcome': "Вітаємо, {name}!",
+        'balance_info': "💰 Баланс: {balance} {currency}\nЗапрошених: {invited}\nРівень: {level}",
+        'ask_withdraw': "💸 Введіть суму для виведення (мінімум {min} {currency}):",
+        'withdraw_pending': "Ваш запит на вивід прийнято на модерацію.",
+        'referral_link': "Ваша реферальна посилання: {link}",
+        'level_info': "Ваш рівень: {level}",
+        'settings': "⚙️ Налаштування:\n🗣 Мова: {language}\n💱 Валюта: {currency}",
+        'profile_info': "👤 Профіль:\nІм’я: {name}\nID: {user_id}\nРівень: {level}\nЗапрошених: {invited}",
+        'support': "📞 Для підтримки напишіть @YourSupportBot"
     },
-    "menu_title": {
-        "EN": "Main menu",
-        "UA": "Головне меню",
-        "RU": "Главное меню"
+    'en': {
+        'welcome': "Hello, {name}!",
+        'balance_info': "💰 Balance: {balance} {currency}\nInvited: {invited}\nLevel: {level}",
+        'ask_withdraw': "💸 Enter withdrawal amount (min {min} {currency}):",
+        'withdraw_pending': "Your withdrawal request is pending approval.",
+        'referral_link': "Your referral link: {link}",
+        'level_info': "Your level: {level}",
+        'settings': "⚙️ Settings:\n🗣 Language: {language}\n💱 Currency: {currency}",
+        'profile_info': "👤 Profile:\nName: {name}\nID: {user_id}\nLevel: {level}\nInvited: {invited}",
+        'support': "📞 For support contact @YourSupportBot"
     },
-    "balance": {
-        "EN": "Your balance: {bal} {cur}\nInvited: {ref}",
-        "UA": "Ваш баланс: {bal} {cur}\nЗапрошено користувачів: {ref}",
-        "RU": "Ваш баланс: {bal} {cur}\nПриглашено пользователей: {ref}"
-    },
-    "choose_language": {
-        "EN": "Choose language",
-        "UA": "Оберіть мову",
-        "RU": "Выберите язык"
-    },
-    "earn_text": {
-        "EN": "Share this message and earn:\nInvite link: {link}\nYou get: 0.25 USD / 10 UAH / 25 RUB per user",
-        "UA": "Поділись повідомленням і заробляй:\nРеферальне посилання: {link}\nТи отримуєш: 0.25 USD / 10 UAH / 25 RUB за кожного",
-        "RU": "Поделитесь ссылкой и зарабатывайте:\nРеферальная ссылка: {link}\nВы получаете: 0.25 USD / 10 UAH / 25 RUB за каждого"
-    },
-    "withdraw_started": {
-        "EN": "Withdraw request created. Admin will check it.",
-        "UA": "Запит на вивід створено. Адмін перевірить його.",
-        "RU": "Запрос на вывод создан. Админ проверит его."
+    'ru': {
+        'welcome': "Привет, {name}!",
+        'balance_info': "💰 Баланс: {balance} {currency}\nПриглашено: {invited}\nУровень: {level}",
+        'ask_withdraw': "💸 Введите сумму для вывода (мин. {min} {currency}):",
+        'withdraw_pending': "Ваш запрос на вывод принят на модерацию.",
+        'referral_link': "Ваша реферальная ссылка: {link}",
+        'level_info': "Ваш уровень: {level}",
+        'settings': "⚙️ Настройки:\n🗣 Язык: {language}\n💱 Валюта: {currency}",
+        'profile_info': "👤 Профиль:\nИмя: {name}\nID: {user_id}\nУровень: {level}\nПриглашено: {invited}",
+        'support': "📞 Для поддержки напишите @YourSupportBot"
     }
 }
