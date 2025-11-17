@@ -1,44 +1,49 @@
 # main.py
 import asyncio
 from aiogram import Bot, Dispatcher
-from aiogram.filters import CommandStart, Command
 from config import BOT_TOKEN
-from database import init_db, SessionLocal
-import handlers.start as start_handler
-import handlers.menu as menu_handler
-import handlers.balance as balance_handler
-import handlers.withdraw as withdraw_handler
-import handlers.earn as earn_handler
-import handlers.promotion as promo_handler
-import handlers.stars as stars_handler
-import handlers.settings as settings_handler
-import handlers.profile as profile_handler
-import handlers.support as support_handler
-import handlers.admin as admin_handler
+from database import init_db  # Функція асинхронної ініціалізації БД
+
+# Імпорт усіх роутерів
+from handlers.start import router as start_router
+from handlers.menu import router as menu_router
+from handlers.balance import router as balance_router
+from handlers.withdraw import router as withdraw_router
+from handlers.earn import router as earn_router
+from handlers.promotion import router as promo_router
+from handlers.stars import router as stars_router
+from handlers.settings import router as settings_router
+from handlers.profile import router as profile_router
+from handlers.support import router as support_router
+from handlers.admin import router as admin_router
+
 
 async def main():
-    # Ініціалізуємо БД (створення таблиць)
+    # Ініціалізація бази даних (створення таблиць)
     await init_db()
+
     # Створюємо об'єкти бота та диспетчера
-    bot = Bot(token=BOT_TOKEN)
+    bot = Bot(token=BOT_TOKEN, parse_mode="HTML")
     dp = Dispatcher()
 
-    # Підключаємо всі роутери/обробники
-    # (кожний модуль handlers.* сам реєструє свої хендлери)
-    dp.include_router(start_handler.router)
-    dp.include_router(menu_handler.router)
-    dp.include_router(balance_handler.router)
-    dp.include_router(withdraw_handler.router)
-    dp.include_router(earn_handler.router)
-    dp.include_router(promo_handler.router)
-    dp.include_router(stars_handler.router)
-    dp.include_router(settings_handler.router)
-    dp.include_router(profile_handler.router)
-    dp.include_router(support_handler.router)
-    dp.include_router(admin_handler.router)
+    # Підключаємо всі роутери
+    dp.include_router(start_router)
+    dp.include_router(menu_router)
+    dp.include_router(balance_router)
+    dp.include_router(withdraw_router)
+    dp.include_router(earn_router)
+    dp.include_router(promo_router)
+    dp.include_router(stars_router)
+    dp.include_router(settings_router)
+    dp.include_router(profile_router)
+    dp.include_router(support_router)
+    dp.include_router(admin_router)
 
-    # Запускаємо опитування Telegram-серверу
+    print("Bot is running...")
+
+    # Запускаємо полінг
     await dp.start_polling(bot)
+
 
 if __name__ == "__main__":
     asyncio.run(main())
