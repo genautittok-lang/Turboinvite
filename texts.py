@@ -1,5 +1,5 @@
 # texts.py
-TEXTS = {
+texts = {
     'uk': {
         'welcome': "Вітаємо, {name}!",
         'balance_info': "💰 Баланс: {balance} {currency}\nЗапрошених: {invited}\nРівень: {level}",
