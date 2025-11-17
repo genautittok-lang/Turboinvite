@@ -1,5 +1,12 @@
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
+def language_menu():
+    return InlineKeyboardMarkup(inline_keyboard=[
+        [InlineKeyboardButton("🇺🇦 Українська", callback_data="lang_ua")],
+        [InlineKeyboardButton("🇬🇧 English", callback_data="lang_en")],
+        [InlineKeyboardButton("🇷🇺 Русский", callback_data="lang_ru")]
+    ])
+
 def main_menu(lang="EN"):
     texts = {
         "UA": ["💰 Баланс", "💸 Вивід", "🎯 Заробляти", "🚀 Розкрутка", "⭐ Telegram Stars", "⚙️ Налаштування", "📞 Підтримка"],
@@ -7,25 +14,14 @@ def main_menu(lang="EN"):
         "RU": ["💰 Баланс", "💸 Вывод", "🎯 Заработать", "🚀 Продвижение", "⭐ Telegram Stars", "⚙️ Настройки", "📞 Поддержка"]
     }
     btns = texts.get(lang, texts["EN"])
-    kb = InlineKeyboardMarkup(
-        inline_keyboard=[
-            [InlineKeyboardButton(text=btns[0], callback_data="balance")],
-            [InlineKeyboardButton(text=btns[1], callback_data="withdraw")],
-            [InlineKeyboardButton(text=btns[2], callback_data="earn")],
-            [InlineKeyboardButton(text=btns[3], callback_data="promo")],
-            [InlineKeyboardButton(text=btns[4], callback_data="stars")],
-            [InlineKeyboardButton(text=btns[5], callback_data="settings")],
-            [InlineKeyboardButton(text=btns[6], callback_data="support")]
-        ]
-    )
+    kb = InlineKeyboardMarkup(inline_keyboard=[
+        [InlineKeyboardButton(btns[0], callback_data="balance")],
+        [InlineKeyboardButton(btns[1], callback_data="withdraw")],
+        [InlineKeyboardButton(btns[2], callback_data="earn")],
+        [InlineKeyboardButton(btns[3], callback_data="promo")],
+        [InlineKeyboardButton(btns[4], callback_data="stars")],
+        [InlineKeyboardButton(btns[5], callback_data="settings")],
+        [InlineKeyboardButton(btns[6], callback_data="support")]
+    ])
     return kb
 
-def language_menu():
-    kb = InlineKeyboardMarkup(
-        inline_keyboard=[
-            [InlineKeyboardButton(text="🇺🇦 Українська", callback_data="lang_ua")],
-            [InlineKeyboardButton(text="🇬🇧 English", callback_data="lang_en")],
-            [InlineKeyboardButton(text="🇷🇺 Русский", callback_data="lang_ru")]
-        ]
-    )
-    return kb
