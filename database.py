@@ -1,25 +1,16 @@
 # database.py
-from sqlalchemy import create_engine
-from sqlalchemy.orm import declarative_base, sessionmaker
+import os
+from sqlalchemy import Column, Integer, String, Float, ForeignKey
+from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
+from sqlalchemy.orm import sessionmaker, declarative_base, relationship
+from config import DATABASE_URL
 
-# URL бази даних. На Railway це може бути PostgreSQL, на локалі SQLite
-# Наприклад, SQLite локально:
-DATABASE_URL = "sqlite:///turbo.db"
-# Якщо PostgreSQL на Railway, приклад:
-# DATABASE_URL = "postgresql+asyncpg://username:password@host:port/dbname"
+# Створення асинхронного двигуна та сесії
+engine = create_async_engine(DATABASE_URL, echo=True)
+SessionLocal = sessionmaker(engine, expire_on_commit=False, class_=AsyncSession)
 
-# Створюємо Base для моделей
 Base = declarative_base()
 
-# Створюємо движок та сесію
-engine = create_engine(DATABASE_URL, echo=True, future=True)
-SessionLocal = sessionmaker(bind=engine, autoflush=False, autocommit=False)
-
-def init_db():
-    """
-    Ініціалізація бази даних:
-    - Імпортуємо всі моделі всередині функції, щоб уникнути циклічного імпорту
-    - Створюємо всі таблиці
-    """
-    import models  # тут імпорт моделей всередині функції
-    Base.metadata.create_all(bind=engine)
+async def init_db():
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)
