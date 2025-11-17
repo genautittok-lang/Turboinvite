@@ -1,6 +1,10 @@
 import sqlite3
+import os
 
 DB_PATH = "data/turbo.db"
+
+# Створюємо папку, якщо її немає
+os.makedirs(os.path.dirname(DB_PATH), exist_ok=True)
 
 def get_connection():
     conn = sqlite3.connect(DB_PATH)
@@ -10,6 +14,7 @@ def get_connection():
 def create_tables():
     conn = get_connection()
     cursor = conn.cursor()
+    
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS users (
             user_id INTEGER PRIMARY KEY,
@@ -21,6 +26,7 @@ def create_tables():
             join_date TEXT
         )
     """)
+    
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS withdraw_requests (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -32,6 +38,7 @@ def create_tables():
             date TEXT
         )
     """)
+    
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS transactions (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -42,6 +49,7 @@ def create_tables():
             date TEXT
         )
     """)
+    
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS channel_orders (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -53,6 +61,7 @@ def create_tables():
             date TEXT
         )
     """)
+    
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS achievements (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -61,6 +70,9 @@ def create_tables():
             date TEXT
         )
     """)
+    
     conn.commit()
     conn.close()
+
+# Створюємо таблиці при запуску
 create_tables()
