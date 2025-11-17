@@ -3,7 +3,7 @@ from aiogram import Router
 from aiogram.types import CallbackQuery, InlineKeyboardMarkup, InlineKeyboardButton
 from database import SessionLocal
 from models import User
-from texts import texts
+from texts import TEXTS
 from keyboards.settings_menu import settings_menu
 
 router = Router()
